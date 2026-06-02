@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Rigidbody rb;
+    private PlayerInputHandler inputHandler;
+    [SerializeField] private float moveSpeed = 5f;
+
+    void Awake()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        inputHandler = GetComponent<PlayerInputHandler>();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    void FixedUpdate()
     {
-        
+
+        rb.linearVelocity = new Vector3(inputHandler.moveInput.x * moveSpeed, rb.linearVelocity.y, 0);
     }
 }
