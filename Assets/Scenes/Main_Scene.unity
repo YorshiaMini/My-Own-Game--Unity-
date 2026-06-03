@@ -877,6 +877,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
+  jumpForce: 5
+  groundCheck: {fileID: 784041193}
+  groundCheckDistance: 0.1
+  surfaceForJump:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1131536150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
   _moveInput: {x: 0, y: 0}
+  _jumpRequest: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

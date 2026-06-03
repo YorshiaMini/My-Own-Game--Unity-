@@ -8,8 +8,9 @@ public class PlayerInputHandler : MonoBehaviour
    [SerializeField] Vector2 _moveInput;
    public Vector2 moveInput => _moveInput;
 
-// [SerializeField] salto?
-    
+
+      [SerializeField] bool _jumpRequest;
+   public bool jumpRequest => _jumpRequest;
 
 
     void Awake()
@@ -32,5 +33,15 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _moveInput = inputActions.Player.Move.ReadValue<Vector2>();
         // Use moveInput for player movement logic   
+
+
+        _jumpRequest = inputActions.Player.Jump.triggered;
+
+        if (_jumpRequest)
+        {
+            Debug.Log("Jump Request: " + _jumpRequest);  
+        }
+          
+        // Use jumpRequest for player jump logic
     }
 }
