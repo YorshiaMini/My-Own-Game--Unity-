@@ -40,6 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (_jumpRequest)
         {
             Debug.Log("Jump Request: " + _jumpRequest);  
+            
         }
           
         // Use jumpRequest for player jump logic

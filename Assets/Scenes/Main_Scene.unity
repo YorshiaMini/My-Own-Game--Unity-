@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 560950103}
   - component: {fileID: 560950102}
   - component: {fileID: 560950101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -877,10 +877,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
-  jumpForce: 5
-  groundCheck: {fileID: 784041193}
-  groundCheckDistance: 0.1
-  surfaceForJump:
+  _jumpForce: 5
+  _groundCheck: {fileID: 784041193}
+  _groundCheckDistance: 0.1
+  _surfaceForJump:
     serializedVersion: 2
     m_Bits: 64
 --- !u!114 &1131536150
