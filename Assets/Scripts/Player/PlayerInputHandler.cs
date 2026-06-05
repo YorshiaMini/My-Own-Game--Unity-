@@ -35,14 +35,18 @@ public class PlayerInputHandler : MonoBehaviour
         // Use moveInput for player movement logic   
 
 
-        _jumpRequest = inputActions.Player.Jump.triggered;
-
-        if (_jumpRequest)
+        if (inputActions.Player.Jump.triggered)
         {
-            Debug.Log("Jump Request: " + _jumpRequest);  
+            _jumpRequest = true;
             
         }
           
         // Use jumpRequest for player jump logic
+    }
+
+
+    public void ConsumeJumpRequest()
+    {
+        _jumpRequest = false;
     }
 }

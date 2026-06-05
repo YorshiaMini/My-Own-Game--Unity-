@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             Debug.Log("Player Jumped with force"); 
+            inputHandler.ConsumeJumpRequest();
             //salto del player 
         }
      
@@ -53,4 +54,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.DrawRay(_groundCheck.position, Vector3.down * _groundCheckDistance, Color.yellow);
     }
+
+
 }
