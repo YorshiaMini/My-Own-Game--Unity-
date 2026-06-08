@@ -52,13 +52,13 @@ public class PlayerMovement : MonoBehaviour
         
 
         //revisa si el player esta tocando el suelo
-        if (_isGrounded && inputHandler.jumpRequest)
+        if (_isGrounded && inputHandler.HasJumpBuffered)
         {  
            rb.linearVelocity = new Vector3(rb.linearVelocity.x, _jumpForce, 0); 
            // Aplica la fuerza de salto directamente a la velocidad vertical
 
             Debug.Log("Player Jumped with force"); 
-            inputHandler.ConsumeJumpRequest();
+            inputHandler.ConsumeJumpBuffer();
             //salto del player 
         }
      

@@ -9,25 +9,20 @@ public class PlayerInputHandler : MonoBehaviour
    public Vector2 moveInput => _moveInput;
 
 
-      [SerializeField] bool _jumpRequest;
-   public bool jumpRequest => _jumpRequest;
+   [SerializeField] private float jumpBufferTime = 0.1f;
+     // Tiempo durante el cual el salto se puede ejecutar después de presionar el botón
+    private float jumpBufferCounter; // Contador para el tiempo de buffer de salto
+
+    public bool HasJumpBuffered => jumpBufferCounter > 0; // Propiedad para verificar si hay un salto en buffer
+
+
 
 
     void Awake()
     {
         inputActions = new GameInputActions();
     }
-
-
-    void OnEnable()
-    {
-        inputActions.Player.Enable();
-    }
-
-    void OnDisable()
-    {
-        inputActions.Player.Disable();
-    }
+  
     
     void Update()
     {
@@ -37,16 +32,34 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (inputActions.Player.Jump.triggered)
         {
-            _jumpRequest = true;
             
+            jumpBufferCounter = jumpBufferTime; // Reinicia el contador de buffer de salto
+            
+        }
+
+        jumpBufferCounter -= Time.deltaTime; // Decrementa el contador de buffer de salto
+
+        if(jumpBufferCounter < 0)
+        {
+            jumpBufferCounter = 0; // Asegura que el contador no sea negativo
         }
           
         // Use jumpRequest for player jump logic
     }
 
 
-    public void ConsumeJumpRequest()
+    public void ConsumeJumpBuffer()
     {
-        _jumpRequest = false;
+        jumpBufferCounter = 0; // Consume el salto restableciendo el contador de buffer
+    }
+
+      void OnEnable()
+    {
+        inputActions.Player.Enable();
+    }
+
+    void OnDisable()
+    {
+        inputActions.Player.Disable();
     }
 }
