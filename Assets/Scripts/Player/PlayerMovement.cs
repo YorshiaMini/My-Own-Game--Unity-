@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Jump variables
 
-    [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float _jumpForce = 7f;
     [SerializeField] Transform _groundCheck;
     [SerializeField] float _groundCheckDistance = .2f;
     [SerializeField] LayerMask _surfaceForJump;
@@ -24,12 +24,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform _visualModel;
 
 
+    //CoyoteTime variables
+    [SerializeField] private float coyoteTime = 0.2f; // Duración del coyote time en segundos
+    private float coyoteTimeCounter; // Contador para el coyote time    
+
+    public bool HasCoyoteTime => coyoteTimeCounter > 0f; 
+    // Propiedad para verificar si el player aún tiene coyote time disponible
+
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         inputHandler = GetComponent<PlayerInputHandler>();
         _isGrounded = true; // Inicializa el estado de grounded
+        coyoteTimeCounter = 0f; // Inicializa el contador del coyote time
 
         targetRotation = _visualModel.rotation; // Inicializa la rotación objetivo con la rotación actual del modelo visual   
     }
@@ -38,6 +47,22 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GiroPlayer();
+
+        // Coyote Time logic
+        if (_isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime; // Reinicia el contador del coyote time cuando el player está en el suelo
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime; // Decrementa el contador del coyote time cuando el player no está en el suelo
+        }
+
+        if (coyoteTimeCounter < 0f) // Asegura que el contador no sea negativo
+        {
+            coyoteTimeCounter = 0f; 
+        }
+
     }
     
     void FixedUpdate()
@@ -47,18 +72,17 @@ public class PlayerMovement : MonoBehaviour
 
         _isGrounded = Physics.Raycast(_groundCheck.position, Vector3.down, _groundCheckDistance, _surfaceForJump);
 
-        Debug.Log("Is Grounded: " + _isGrounded); // Debug para verificar si el player está tocando el suelo
-        drawRayCast();
+        drawRayCast(); //Dibuja el raycast para verificar si el player está tocando el suelo
         
 
-        //revisa si el player esta tocando el suelo
-        if (_isGrounded && inputHandler.HasJumpBuffered)
+        //controla que podamos saltar
+        if (inputHandler.HasJumpBuffered && HasCoyoteTime)
         {  
            rb.linearVelocity = new Vector3(rb.linearVelocity.x, _jumpForce, 0); 
            // Aplica la fuerza de salto directamente a la velocidad vertical
 
-            Debug.Log("Player Jumped with force"); 
             inputHandler.ConsumeJumpBuffer();
+            ConsumeCoyoteTime();
             //salto del player 
         }
      
@@ -81,6 +105,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _visualModel.rotation = Quaternion.Slerp(_visualModel.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
+    }
+
+    void ConsumeCoyoteTime()
+    {
+        coyoteTimeCounter = 0f; // Consume el coyote time al realizar un salto
     }
 
 }
