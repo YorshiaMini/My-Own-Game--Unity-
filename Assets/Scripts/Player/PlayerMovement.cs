@@ -97,11 +97,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (inputHandler.moveInput.x > 0)
         {
-            targetRotation = Quaternion.Euler(0, 0, 0);
+            targetRotation = Quaternion.Euler(0, 90, 0);
         }
         else if (inputHandler.moveInput.x < 0)
         {
-            targetRotation = Quaternion.Euler(0, -180, 0);
+            targetRotation = Quaternion.Euler(0, -90, 0);
         }
 
         _visualModel.rotation = Quaternion.Slerp(_visualModel.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
