@@ -16,10 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform _groundCheck;
     [SerializeField] float _groundCheckDistance = .2f;
     [SerializeField] LayerMask _surfaceForJump;
-    bool _isGrounded;
+    private bool _isGrounded;
+    public bool IsGrounded => _isGrounded; // Propiedad pública para acceder al estado de grounded desde otras clases
 
     //Giro Player
-    private float _rotationSpeed = 7f;
+    private float _rotationSpeed = 10.5f;
     Quaternion targetRotation;
     [SerializeField] Transform _visualModel;
 
@@ -31,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     public bool HasCoyoteTime => coyoteTimeCounter > 0f; 
     // Propiedad para verificar si el player aún tiene coyote time disponible
 
+
+    //Speed Variable
+    public float CurrentSpeed => Mathf.Abs(rb.linearVelocity.x); // Propiedad pública para acceder a la velocidad del player desde otras clases
 
 
     void Awake()
@@ -49,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         GiroPlayer();
 
         // Coyote Time logic
-        if (_isGrounded)
+        if (_isGrounded && rb.linearVelocity.y <= 0)
         {
             coyoteTimeCounter = coyoteTime; // Reinicia el contador del coyote time cuando el player está en el suelo
         }
@@ -59,9 +63,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (coyoteTimeCounter < 0f) // Asegura que el contador no sea negativo
+        
         {
             coyoteTimeCounter = 0f; 
         }
+
+        Debug.Log(coyoteTimeCounter);
 
     }
     
@@ -79,12 +86,14 @@ public class PlayerMovement : MonoBehaviour
         if (inputHandler.HasJumpBuffered && HasCoyoteTime)
         {  
            rb.linearVelocity = new Vector3(rb.linearVelocity.x, _jumpForce, 0); 
+          
            // Aplica la fuerza de salto directamente a la velocidad vertical
 
             inputHandler.ConsumeJumpBuffer();
             ConsumeCoyoteTime();
             //salto del player 
         }
+
      
     }
 

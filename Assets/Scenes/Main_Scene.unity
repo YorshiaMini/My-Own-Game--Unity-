@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 307794040}
   - component: {fileID: 307794043}
   - component: {fileID: 307794042}
+  - component: {fileID: 307794044}
   m_Layer: 0
   m_Name: PlayerRoot
   m_TagString: Untagged
@@ -353,6 +354,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
   _moveInput: {x: 0, y: 0}
   jumpBufferTime: 0.1
+--- !u!114 &307794044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307794038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a3c188b4f525b419b6dce8cd7fe58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  animator: {fileID: 959346416}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,6 +872,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 2670655c8fabdb242a5bcf223f0cbe31, type: 2}
+    - target: {fileID: 5866666021909216657, guid: e8515177b87c8084ebec97f0d4b1c79d, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6181956722873488958, guid: e8515177b87c8084ebec97f0d4b1c79d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.128
@@ -874,6 +892,11 @@ PrefabInstance:
 --- !u!4 &959346415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e8515177b87c8084ebec97f0d4b1c79d, type: 3}
+  m_PrefabInstance: {fileID: 959346414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &959346416 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e8515177b87c8084ebec97f0d4b1c79d, type: 3}
   m_PrefabInstance: {fileID: 959346414}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1061578722
