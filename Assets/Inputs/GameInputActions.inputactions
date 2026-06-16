@@ -23,6 +23,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TimeFreeze",
+                    "type": "Button",
+                    "id": "2aaea70d-2850-45b5-834c-5dd7931c9be5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -91,6 +100,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "fd91aba3-178a-4390-a84c-3940b4e2fde8",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TimeFreeze",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

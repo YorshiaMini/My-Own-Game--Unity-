@@ -15,7 +15,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool HasJumpBuffered => jumpBufferCounter > 0; // Propiedad para verificar si hay un salto en buffer
 
-
+    public bool FreezePressed => inputActions.Player.TimeFreeze.triggered;
+     // Propiedad para verificar si el botón de congelar tiempo ha sido presionado
 
 
     void Awake()
@@ -45,6 +46,8 @@ public class PlayerInputHandler : MonoBehaviour
         }
           
         // Use jumpRequest for player jump logic
+
+        
     }
 
 
