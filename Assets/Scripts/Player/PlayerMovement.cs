@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     
     private PlayerInputHandler inputHandler;
+    private PlayerTimeFreeze timeFreezeHandler;
     private Rigidbody rb;
 
 
@@ -41,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inputHandler = GetComponent<PlayerInputHandler>();
+        timeFreezeHandler = GetComponent<PlayerTimeFreeze>();
+
+
         _isGrounded = true; // Inicializa el estado de grounded
         coyoteTimeCounter = 0f; // Inicializa el contador del coyote time
 
@@ -68,13 +72,15 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter = 0f; 
         }
 
-        Debug.Log(coyoteTimeCounter);
 
     }
     
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(inputHandler.moveInput.x * moveSpeed, rb.linearVelocity.y, 0);
+        if (!timeFreezeHandler.IsFrozen)
+        {
+            rb.linearVelocity = new Vector3(inputHandler.moveInput.x * moveSpeed, rb.linearVelocity.y, 0);
+        }
         //movimiento del player
 
         _isGrounded = Physics.Raycast(_groundCheck.position, Vector3.down, _groundCheckDistance, _surfaceForJump);
@@ -83,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         
 
         //controla que podamos saltar
-        if (inputHandler.HasJumpBuffered && HasCoyoteTime)
+        if (inputHandler.HasJumpBuffered && HasCoyoteTime && !timeFreezeHandler.IsFrozen)
         {  
            rb.linearVelocity = new Vector3(rb.linearVelocity.x, _jumpForce, 0); 
           
