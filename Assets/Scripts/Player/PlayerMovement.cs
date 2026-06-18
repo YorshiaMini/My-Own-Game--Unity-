@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
 
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 7.5f;
 
 
     //Jump variables
