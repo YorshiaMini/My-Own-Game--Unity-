@@ -6,6 +6,9 @@ public class FreezeOverlayController : MonoBehaviour
     
     private PlayerTimeFreeze playerTimeFreeze;
     [SerializeField] private Image freezeOverlay;
+    [SerializeField] private Image freezeBarFill;
+    [SerializeField] private Image freezeBarBackground;
+
 
 
 
@@ -18,11 +21,14 @@ public class FreezeOverlayController : MonoBehaviour
     Color currentColor;
 
 
-
+ 
     void Awake()
     {
         playerTimeFreeze = GetComponent<PlayerTimeFreeze>();
         targetAlpha = normalAlpha;
+        freezeBarBackground.gameObject.SetActive(false);
+
+    
     }
 
   
@@ -31,10 +37,14 @@ public class FreezeOverlayController : MonoBehaviour
         if (playerTimeFreeze.IsFrozen)
         {
             targetAlpha = freezeAlpha;
+            freezeBarFill.fillAmount = playerTimeFreeze.FreezeCounter / playerTimeFreeze.FreezeDuration;    
+            freezeBarBackground.gameObject.SetActive(true);
         }
         else
         {
             targetAlpha = normalAlpha;
+            freezeBarBackground.gameObject.SetActive(false);
+        
         }
 
         CambioOverlay();

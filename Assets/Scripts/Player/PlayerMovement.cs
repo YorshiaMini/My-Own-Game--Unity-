@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     
     private PlayerInputHandler inputHandler;
     private PlayerTimeFreeze timeFreezeHandler;
+    private PlayerGrapple playerGrapple;
     private Rigidbody rb;
 
 
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inputHandler = GetComponent<PlayerInputHandler>();
+        playerGrapple = GetComponent<PlayerGrapple>();
         timeFreezeHandler = GetComponent<PlayerTimeFreeze>();
 
 
@@ -55,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GiroPlayer();
+
 
         // Coyote Time logic
         if (_isGrounded && rb.linearVelocity.y <= 0)
@@ -77,19 +80,20 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (!timeFreezeHandler.IsFrozen)
+        if (!timeFreezeHandler.IsFrozen && !playerGrapple.IsGrappling) 
         {
             rb.linearVelocity = new Vector3(inputHandler.moveInput.x * moveSpeed, rb.linearVelocity.y, 0);
         }
         //movimiento del player
 
-        _isGrounded = Physics.Raycast(_groundCheck.position, Vector3.down, _groundCheckDistance, _surfaceForJump);
+       _isGrounded = Physics.Raycast(_groundCheck.position, Vector3.down, _groundCheckDistance, _surfaceForJump);
+
 
         drawRayCast(); //Dibuja el raycast para verificar si el player está tocando el suelo
         
 
         //controla que podamos saltar
-        if (inputHandler.HasJumpBuffered && HasCoyoteTime && !timeFreezeHandler.IsFrozen)
+        if (inputHandler.HasJumpBuffered && HasCoyoteTime && !timeFreezeHandler.IsFrozen && !playerGrapple.IsGrappling)
         {  
            rb.linearVelocity = new Vector3(rb.linearVelocity.x, _jumpForce, 0); 
           

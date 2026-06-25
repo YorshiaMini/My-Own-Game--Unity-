@@ -7,13 +7,21 @@ public class PlayerTimeFreeze : MonoBehaviour
 
 
     [SerializeField] float freezeDuration = 4f;
+    public float FreezeDuration => freezeDuration;
     [SerializeField] float freezeCooldown = 6f;
 
     private float freezeCounter;
+    public float FreezeCounter => freezeCounter;
+
+    
     private float cooldownCounter; //-=Time.unscaledDeltaTime; // Contador para el tiempo de enfriamiento
+    public float CooldownCounter => cooldownCounter;
+
 
     private bool isFrozen;
     public bool IsFrozen => isFrozen;
+
+
     private bool canFreeze = true;
 
 
@@ -85,7 +93,7 @@ public class PlayerTimeFreeze : MonoBehaviour
         
     }
 
-    void DeactivateTimeFreeze()
+    public void DeactivateTimeFreeze()
     {
         isFrozen = false;
         cooldownCounter = freezeCooldown; // Inicia el contador de enfriamiento

@@ -18,6 +18,9 @@ public class PlayerInputHandler : MonoBehaviour
     public bool FreezePressed => inputActions.Player.TimeFreeze.triggered;
      // Propiedad para verificar si el botón de congelar tiempo ha sido presionado
 
+     public bool GrapplePressed => inputActions.Player.Grapple.triggered;
+     // Propiedad para verificar si el botón de agarre ha sido presionado
+
 
     void Awake()
     {
