@@ -8,6 +8,7 @@ public class PlayerGrapple : MonoBehaviour
     public bool IsGrappling => isGrappling; // Propiedad pública para acceder al estado de grappling desde otras clases
     private Transform grappleTarget;
     [SerializeField] private float grappleSpeed = 10f;
+    
 
     //Cuerda    
     [SerializeField] private LineRenderer lineRenderer;
@@ -23,6 +24,9 @@ public class PlayerGrapple : MonoBehaviour
     void Update()
     {
         if(!isGrappling) { return; }
+
+        lineRenderer.SetPosition(0,transform.position + new Vector3(0,1,0));
+        lineRenderer.SetPosition(1,grappleTarget.position);
 
         transform.position = Vector3.MoveTowards(transform.position, grappleTarget.position, grappleSpeed * Time.deltaTime);
 
@@ -41,6 +45,7 @@ public class PlayerGrapple : MonoBehaviour
         grappleTarget = target;
         isGrappling = true;
         lineRenderer.enabled = true;
+        Debug.Log(lineRenderer.enabled);
         // Aquí puedes agregar la lógica para iniciar el gancho, como mover al jugador hacia el objetivo.
     }
 
