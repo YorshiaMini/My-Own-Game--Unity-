@@ -9,10 +9,14 @@ public class PlayerGrapple : MonoBehaviour
     private Transform grappleTarget;
     [SerializeField] private float grappleSpeed = 10f;
 
+    //Cuerda    
+    [SerializeField] private LineRenderer lineRenderer;
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        lineRenderer.enabled = false;
     }
 
 
@@ -25,9 +29,8 @@ public class PlayerGrapple : MonoBehaviour
         if(Vector3.Distance(transform.position, grappleTarget.position) < 1f)
         {
             isGrappling = false;
+            lineRenderer.enabled = false;
             // Aquí puedes agregar la lógica para cuando el jugador llega al objetivo del gancho.
-             Debug.Log(IsGrappling);
-    
         }
     
       
@@ -37,6 +40,7 @@ public class PlayerGrapple : MonoBehaviour
     {
         grappleTarget = target;
         isGrappling = true;
+        lineRenderer.enabled = true;
         // Aquí puedes agregar la lógica para iniciar el gancho, como mover al jugador hacia el objetivo.
     }
 
