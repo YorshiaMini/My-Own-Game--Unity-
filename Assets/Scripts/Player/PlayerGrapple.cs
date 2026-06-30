@@ -7,7 +7,7 @@ public class PlayerGrapple : MonoBehaviour
     private bool isGrappling = false;
     public bool IsGrappling => isGrappling; // Propiedad pública para acceder al estado de grappling desde otras clases
     private Transform grappleTarget;
-    [SerializeField] private float grappleSpeed = 10f;
+    [SerializeField] private float grappleSpeed = 12f;
     
 
     //Cuerda    
@@ -30,7 +30,7 @@ public class PlayerGrapple : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, grappleTarget.position, grappleSpeed * Time.deltaTime);
 
-        if(Vector3.Distance(transform.position, grappleTarget.position) < 1f)
+        if(Vector3.Distance(transform.position, grappleTarget.position) < 2f)
         {
             isGrappling = false;
             lineRenderer.enabled = false;

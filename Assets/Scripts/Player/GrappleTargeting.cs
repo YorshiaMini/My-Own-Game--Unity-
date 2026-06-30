@@ -14,7 +14,7 @@ public class GrappleTargeting : MonoBehaviour
     private Transform previousTarget; // la que estaba apuntando anteriormente
     private Transform currentTarget; // la que se está apuntando actualmente
     private Transform selectedTarget; // la que se ha seleccionado para el gancho
-   [SerializeField] private float grappleRange = 10f;
+   [SerializeField] private float grappleRange = 8f;
     bool isGrappleTargetInRange;
 
     private float currentTargetDistance;
@@ -68,19 +68,19 @@ public class GrappleTargeting : MonoBehaviour
                     previousTarget.GetComponent<GrapplePoint>().SetNormal();
                 }
                 
-                
-                if(isGrappleTargetInRange)
-                {
-                    currentGrapplePoint.SetValid();
-                }
-                else
-                {
-                    currentGrapplePoint.SetInvalid();
-                }
-
                 previousTarget = currentTarget;   
             }
 
+
+               
+            if(isGrappleTargetInRange)
+                {
+                    currentGrapplePoint.SetValid();
+                }
+            else
+                {
+                    currentGrapplePoint.SetInvalid();
+                }
 
             
 

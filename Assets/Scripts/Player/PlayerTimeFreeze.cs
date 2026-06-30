@@ -8,7 +8,7 @@ public class PlayerTimeFreeze : MonoBehaviour
 
     [SerializeField] float freezeDuration = 4f;
     public float FreezeDuration => freezeDuration;
-    [SerializeField] float freezeCooldown = 6f;
+    [SerializeField] float freezeCooldown = 1.5f;
 
     private float freezeCounter;
     public float FreezeCounter => freezeCounter;
